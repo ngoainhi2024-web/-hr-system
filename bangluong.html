@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>HR SYSTEM</h2>
+
+<a href="/dashboard">📊 Dashboard</a> |
+<a href="/export">📥 Excel</a> |
+<a href="/logout">🚪 Logout</a>
+
+<br><br>
+
+<form action="/upload" method="post" enctype="multipart/form-data">
+Tháng: <input type="month" name="thang">
+<input type="file" name="file">
+<button>Upload Excel</button>
+</form>
+
+<br><br>
+
+<table border="1">
+<tr>
+<th>ID</th>
+<th>Tên</th>
+<th>Tháng</th>
+<th>Lương</th>
+<th>Thưởng</th>
+<th>Phụ cấp</th>
+<th>Người PT</th>
+<th>Tổng</th>
+<th>Thuế</th>
+<th>Thực nhận</th>
+<th>Action</th>
+</tr>
+
+{% for r in data %}
+<tr>
+<form action="/save" method="post">
+<td>{{ r[0] }}</td>
+
+<td>
+<a href="/nhanvien/{{ r[1]|urlencode }}" target="_blank">
+{{ r[1] }}
+</a><br>
+<input name="ten" value="{{ r[1] }}">
+</td>
+
+<td><input name="thang" value="{{ r[2] }}"></td>
+<td><input name="luong" value="{{ r[3] }}"></td>
+<td><input name="thuong" value="{{ r[4] }}"></td>
+<td><input name="phu_cap" value="{{ r[5] }}"></td>
+<td><input name="nguoi_pt" value="{{ r[6] }}"></td>
+
+<td>{{ "{:,.0f}".format(r[7]) }}</td>
+<td>{{ "{:,.0f}".format(r[8]) }}</td>
+<td>{{ "{:,.0f}".format(r[9]) }}</td>
+
+<td>
+<button>💾</button>
+<a href="/delete/{{ r[0] }}">❌</a>
+</td>
+</form>
+</tr>
+{% endfor %}
+
+<tr>
+<form action="/save" method="post">
+<td>New</td>
+<td><input name="ten"></td>
+<td><input name="thang"></td>
+<td><input name="luong"></td>
+<td><input name="thuong"></td>
+<td><input name="phu_cap"></td>
+<td><input name="nguoi_pt"></td>
+<td>-</td><td>-</td><td>-</td>
+<td><button>➕</button></td>
+</form>
+</tr>
+
+</table>
+
+</body>
+</html>

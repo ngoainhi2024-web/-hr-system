@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<h2>Dashboard</h2>
+
+<canvas id="chart"></canvas>
+
+<script>
+new Chart(document.getElementById("chart"), {
+    type: "bar",
+    data: {
+        labels: {{ labels|safe }},
+        datasets: [{
+            label: "Tổng lương",
+            data: {{ values|safe }}
+        }]
+    }
+});
+</script>
+
+<br>
+<a href="/">⬅ Quay lại</a>
+
+</body>
+</html>

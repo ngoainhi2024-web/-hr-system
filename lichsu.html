@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Lịch sử lương: {{ ten }}</h2>
+
+<table border="1">
+<tr>
+<th>Tháng</th>
+<th>Tổng</th>
+<th>Thuế</th>
+<th>Thực nhận</th>
+</tr>
+
+{% for r in data %}
+<tr>
+<td>{{ r[0] }}</td>
+<td>{{ "{:,.0f}".format(r[1]) }}</td>
+<td>{{ "{:,.0f}".format(r[2]) }}</td>
+<td>{{ "{:,.0f}".format(r[3]) }}</td>
+</tr>
+{% endfor %}
+
+</table>
+
+<br>
+<a href="/">⬅ Quay lại</a>
+
+</body>
+</html>
